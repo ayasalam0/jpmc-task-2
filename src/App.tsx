@@ -45,7 +45,10 @@ class App extends Component<{}, IState> {
       DataStreamer.getData((serverResponds: ServerRespond[]) => {
         // Update the state by creating a new array of data that consists of
         // Previous data in the state and the new data from server
-        this.setState({ data: [...this.state.data, ...serverResponds] });
+        this.setState({
+          data: [...this.state.data, ...serverResponds],
+          showGraph: true,
+        });
       });
 
       x++;
