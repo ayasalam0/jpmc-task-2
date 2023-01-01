@@ -9,6 +9,7 @@ import "./App.css";
  */
 interface IState {
   data: ServerRespond[];
+  //added state type for Graph toggle
   showGraph: boolean;
 }
 
@@ -24,6 +25,7 @@ class App extends Component<{}, IState> {
       // data saves the server responds.
       // We use this state to parse data down to the child element (Graph) as element property
       data: [],
+      //setting intial state for Graph state toggle
       showGraph: false,
     };
   }
@@ -32,6 +34,7 @@ class App extends Component<{}, IState> {
    * Render Graph react component with state.data parse as property data
    */
   renderGraph() {
+    //show Graph only when we trigger showGraph state to true 
     if (this.state.showGraph) {
       return <Graph data={this.state.data} />;
     }
@@ -41,11 +44,15 @@ class App extends Component<{}, IState> {
    * Get new data from server and update the state with the new data
    */
   getDataFromServer() {
+    //create interval to controll the data flow when time is escalating 
     let x = 0;
     const interval = setInterval(() => {
       DataStreamer.getData((serverResponds: ServerRespond[]) => {
         // Update the state by creating a new array of data that consists of
         // Previous data in the state and the new data from server
+        //on triggering this button change our state 
+        //first set the response to the data that's passed to the Graph component
+        //secont toggle the Graph state to render the component 
         this.setState({
           data: serverResponds,
           showGraph: true,
