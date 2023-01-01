@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { setInterval } from "timers";
 import DataStreamer, { ServerRespond } from "./DataStreamer";
 import Graph from "./Graph";
 import "./App.css";
@@ -46,7 +47,7 @@ class App extends Component<{}, IState> {
         // Update the state by creating a new array of data that consists of
         // Previous data in the state and the new data from server
         this.setState({
-          data: [...this.state.data, ...serverResponds],
+          data: serverResponds,
           showGraph: true,
         });
       });
